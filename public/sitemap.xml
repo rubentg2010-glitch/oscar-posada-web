@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://oscarposadamecanico.netlify.app/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://oscarposadamecanico.netlify.app/mecanico-a-domicilio-malaga/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://oscarposadamecanico.netlify.app/mecanico-a-domicilio-torremolinos/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://oscarposadamecanico.netlify.app/mecanico-a-domicilio-benalmadena/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://oscarposadamecanico.netlify.app/mecanico-a-domicilio-fuengirola/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://oscarposadamecanico.netlify.app/mecanico-a-domicilio-mijas/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://oscarposadamecanico.netlify.app/mecanico-a-domicilio-marbella/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://oscarposadamecanico.netlify.app/mecanico-a-domicilio-estepona/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://oscarposadamecanico.netlify.app/mecanico-a-domicilio-velez-malaga/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://oscarposadamecanico.netlify.app/mecanico-a-domicilio-rincon-de-la-victoria/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://oscarposadamecanico.netlify.app/mecanico-a-domicilio-alhaurin-de-la-torre/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>
