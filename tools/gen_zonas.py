@@ -145,7 +145,7 @@ def page(z):
   </div>
 </div></section>
 </main>
-<footer><div class="w"><span>© 2026 Oscar Posada · Mecánico a domicilio</span><span>Rápido, económico y de confianza</span><a href="tel:+34674623880" style="color:inherit">674 623 880</a></div></footer>
+<footer><div class="w"><span>© 2026 Oscar Posada · Mecánico a domicilio</span><span>Rápido, económico y de confianza</span><a href="tel:+34674623880" style="color:inherit">674 623 880</a></div><div class="w"><p class="cr">Web creada por <b>Rubén Torres</b></p></div></footer>
 <div class="bar"><a class="btn wa" href="{msg}" target="_blank" rel="noopener"><svg class="i" style="width:22px;height:22px"><use href="#ct"/></svg>Pedir presupuesto por WhatsApp</a></div>
 </body>
 </html>
