@@ -395,11 +395,11 @@ f.innerHTML='<div><label>Tu valoración</label><div class="rvs" role="radiogroup
 var sb=f.querySelector('.rvs'),msg=f.querySelector('.rvm'),sub=f.querySelector('button.btn');
 function paint(){[].forEach.call(sb.children,function(b,i){b.className=i<stars?'on':'';b.setAttribute('aria-pressed',i<stars)})}
 for(var i=1;i<=5;i++)(function(n){var b=document.createElement('button');b.type='button';b.textContent='★';b.setAttribute('aria-label',n+' estrellas');b.onclick=function(){stars=n;paint()};sb.appendChild(b)})(i);paint();
-card.querySelector('p').textContent='Tu opinión ayuda a otros conductores a confiar. Aparecerá en la web cuando Oscar la apruebe.';
+card.querySelector('p').textContent='Tu opinión ayuda a otros conductores a confiar. Cuéntanos qué tal fue el servicio.';
 card.querySelector('a.btn').replaceWith(f);
 f.onsubmit=async function(e){e.preventDefault();sub.disabled=true;msg.textContent='Enviando…';
  try{var r=await fetch('/api/reviews',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({name:f.querySelector('#rn').value,zona:f.querySelector('#rz').value,text:f.querySelector('#rt').value,stars:stars,web:f.querySelector('#rw').value})});var j=await r.json().catch(function(){return{}});
-  if(r.ok){f.reset();stars=5;paint();msg.textContent='¡Gracias! Tu opinión se publicará en cuanto Oscar la revise.'}else{msg.textContent=j.error||'No se ha podido enviar. Inténtalo de nuevo.'}}
+  if(r.ok){f.reset();stars=5;paint();msg.textContent='¡Gracias por tu opinión! 🙌'}else{msg.textContent=j.error||'No se ha podido enviar. Inténtalo de nuevo.'}}
  catch(err){msg.textContent='No se ha podido enviar. Inténtalo de nuevo.'}
  sub.disabled=false};
 })();
