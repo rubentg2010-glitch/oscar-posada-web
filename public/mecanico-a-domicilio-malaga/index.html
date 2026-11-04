@@ -174,6 +174,17 @@ footer .cr{width:100%;margin-top:10px;padding-top:10px;border-top:1px solid rgba
 .card:active .ic,.is-tap .ic{transform:scale(1.15) rotate(-8deg);background:var(--or);color:#111}
 @media (prefers-reduced-motion:reduce){.card,.steps li,.trust .g>div,.rvg figure,.ic{transition:none}.card:hover,.steps li:hover,.trust .g>div:hover,.rvg figure:hover{translate:none;scale:none}}
 
+/* BOTONES, TÍTULO Y ESTRELLAS */
+.btn{position:relative;overflow:hidden;transition:transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .25s;-webkit-tap-highlight-color:transparent}
+.btn::after{content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);pointer-events:none}
+@media (hover:hover){.btn:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 12px 28px rgba(0,0,0,.4)}.btn:hover::after{left:130%;transition:left .7s ease}}
+.btn:active{transform:scale(.94);transition-duration:.08s}
+.hw{display:inline-block;opacity:0;transform:translateY(.45em);animation:hw .7s cubic-bezier(.22,.61,.36,1) forwards}
+@keyframes hw{to{opacity:1;transform:none}}
+.st{background:linear-gradient(100deg,currentColor 40%,#fff 50%,currentColor 60%) 150% 0/250% 100% no-repeat;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 4.5s ease-in-out infinite}
+@keyframes shine{0%,55%{background-position:150% 0}100%{background-position:-50% 0}}
+@media (prefers-reduced-motion:reduce){.hw{animation:none;opacity:1;transform:none}.st{animation:none;-webkit-text-fill-color:currentColor;background:none}.btn::after{display:none}}
+
 /* APARICIÓN AL HACER SCROLL */
 .rv{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
 .rv.in{opacity:1;transform:none}
