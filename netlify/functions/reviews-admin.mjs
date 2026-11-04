@@ -13,15 +13,18 @@ export default async (req) => {
     await new Promise((r) => setTimeout(r, 800));
     return json({ error: "Contraseña incorrecta" }, 401);
   }
-  const store = getStore("reviews");
+  const store = getStore({ name: "reviews", consistency: "strong" });
 
   if (req.method === "GET") {
     const list = async (prefix) => {
       const { blobs } = await store.list({ prefix });
       const rows = await Promise.all(
-        blobs.map(async (b) => ({ key: b.key, ...(await store.get(b.key, { type: "json" })) }))
+        blobs.map(async (b) => {
+          const v = await store.get(b.key, { type: "json", consistency: "strong" });
+          return v ? { key: b.key, ...v } : null;
+        })
       );
-      return rows.sort((a, b) => b.ts - a.ts);
+      return rows.filter(Boolean).sort((a, b) => b.ts - a.ts);
     };
     return json({ pending: await list("pending-"), approved: await list("ok-") });
   }

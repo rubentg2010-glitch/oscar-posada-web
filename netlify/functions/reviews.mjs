@@ -10,7 +10,7 @@ const clean = (s, n) =>
 const pub = (r) => ({ name: r.name, zona: r.zona, stars: r.stars, text: r.text, ts: r.ts });
 
 export default async (req) => {
-  const store = getStore("reviews");
+  const store = getStore({ name: "reviews", consistency: "strong" });
 
   if (req.method === "GET") {
     const { blobs } = await store.list({ prefix: "ok-" });
