@@ -49,6 +49,7 @@ section{scroll-margin-top:80px}
 
 /* FONDO FIJO: póster + pase de fotos de respaldo + vídeos encima */
 .bg{position:fixed;inset:0;z-index:-1;overflow:hidden;background:#0b0d10}
+.bg,.bg *{pointer-events:none;-webkit-user-select:none;user-select:none}
 .stage{position:absolute;z-index:0;inset:-2%;background:url(assets/poster-a.jpg) center/cover no-repeat;filter:var(--vf)}
 .k{position:absolute;inset:0;background:center/cover no-repeat;opacity:0;transform-origin:50% 55%;animation:ken 21s linear infinite}
 .ka{background-image:url(assets/poster-a.jpg);animation-delay:-1.05s}
