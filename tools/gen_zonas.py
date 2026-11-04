@@ -51,7 +51,7 @@ EXTRA='''
 .zl a:hover{border-color:var(--or);color:var(--or2)}
 .crumb{font-size:.92rem;color:#cfd6dd;margin-bottom:14px;text-shadow:0 1px 10px rgba(0,0,0,.8)}.crumb a{color:inherit}
 .zs .ch{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin-top:14px}
-.zs .ch li{padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:rgba(20,25,31,.8);font-weight:500}
+.zs .ch a{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:10px 18px;border-radius:999px;border:1px solid var(--line);background:rgba(20,25,31,.85);color:#fff;text-decoration:none;font-weight:600;text-shadow:none;-webkit-tap-highlight-color:rgba(255,122,0,.3)}.zs .ch a::after{content:'→';color:var(--or)}.zs .ch a:hover,.zs .ch a:active{border-color:var(--or);color:var(--or2)}
 '''
 
 def page(z):
@@ -66,7 +66,7 @@ def page(z):
     ld_faq={"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in faq]}
     ld_bc={"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":D+"/"},{"@type":"ListItem","position":2,"name":f"Mecánico a domicilio en {n}","item":u}]}
     others=''.join(f'<li><a href="/mecanico-a-domicilio-{s}/">{e(m)}</a></li>' for m,s,_,_ in Z if s!=slug)
-    serv=''.join(f'<li>{e(s)}</li>' for s in SERV)
+    serv=''.join(f'<li><a href="{wa(f"Hola Oscar, necesito {s} en {n}. Quiero pedir presupuesto.")}" target="_blank" rel="noopener">{e(s)}</a></li>' for s in SERV)
     msg=wa(f'Hola Oscar, quiero pedir presupuesto en {n}.')
     return f'''<!DOCTYPE html>
 <html lang="es">
@@ -122,7 +122,7 @@ def page(z):
 
 <section class="zs"><div class="w">
   <h2>Servicios a domicilio en {e(n)}</h2>
-  <p>Se hace todo tipo de reparaciones, desde un cambio de aceite hasta una avería de motor.</p>
+  <p>Se hace todo tipo de reparaciones, desde un cambio de aceite hasta una avería de motor. <b>Pulsa el servicio que necesitas</b> y te abro WhatsApp con el mensaje listo para pedir presupuesto.</p>
   <ul class="ch">{serv}</ul>
 </div></section>
 
