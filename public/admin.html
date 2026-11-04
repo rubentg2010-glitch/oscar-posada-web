@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Opiniones · Administración</title>
+<style>body{font-family:system-ui,sans-serif;background:#0b0d10;color:#eef0f2;margin:0;padding:20px}main{max-width:720px;margin:0 auto}h1{font-size:1.4rem}h2{margin-top:28px;font-size:1.1rem;color:#ffa040}input,button{font:inherit;padding:11px 14px;border-radius:10px;border:1px solid #333;background:#1a1f26;color:#fff}button{cursor:pointer;font-weight:600}.ok{background:#22c55e;color:#04210f;border:0}.no{background:#3a4048;border:0}.card{background:#14191f;border:1px solid #262d36;border-radius:14px;padding:16px;margin:12px 0}.st{color:#ff7a00;letter-spacing:3px}small{color:#a9b3be}#m{color:#ffa040;margin:10px 0}</style></head>
+<body><main><h1>Opiniones de clientes</h1>
+<form id="f"><input id="p" type="password" placeholder="Contraseña" autocomplete="current-password" required> <button class="ok" type="submit">Entrar</button></form>
+<div id="m" role="status"></div><div id="a" hidden><h2>Por aprobar</h2><div id="pe"></div><h2>Publicadas</h2><div id="ap"></div></div></main>
+<script>
+var K="",m=document.getElementById('m');
+function card(r,btns){var d=document.createElement('div');d.className='card';var s=document.createElement('div');s.className='st';s.textContent='★★★★★'.slice(0,r.stars||5);var t=document.createElement('p');t.textContent=r.text;var c=document.createElement('small');c.textContent=(r.name||'')+(r.zona?' · '+r.zona:'')+' · '+new Date(r.ts).toLocaleDateString('es-ES');d.append(s,t,c,document.createElement('br'));btns.forEach(function(b){var e=document.createElement('button');e.className=b[1];e.textContent=b[0];e.style.margin='10px 8px 0 0';e.onclick=function(){act(b[2],r.key)};d.appendChild(e)});return d}
+async function api(opt){var r=await fetch('/api/reviews-admin',Object.assign({headers:{'x-admin-key':K,'content-type':'application/json'}},opt));var j=await r.json();if(!r.ok)throw new Error(j.error||'Error');return j}
+async function load(){try{var j=await api({});document.getElementById('f').hidden=true;document.getElementById('a').hidden=false;m.textContent='';var pe=document.getElementById('pe'),ap=document.getElementById('ap');pe.replaceChildren();ap.replaceChildren();if(!j.pending.length)pe.textContent='No hay opiniones pendientes.';j.pending.forEach(function(r){pe.appendChild(card(r,[['Aprobar','ok','approve'],['Rechazar','no','delete']]))});if(!j.approved.length)ap.textContent='Todavía no hay opiniones publicadas.';j.approved.forEach(function(r){ap.appendChild(card(r,[['Quitar','no','delete']]))})}catch(e){m.textContent=e.message}}
+async function act(a,k){try{await api({method:'POST',body:JSON.stringify({action:a,key:k})});load()}catch(e){m.textContent=e.message}}
+document.getElementById('f').onsubmit=function(e){e.preventDefault();K=document.getElementById('p').value;load()};
+</script></body></html>

@@ -375,5 +375,27 @@ footer .w{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-betwee
   document.addEventListener('visibilitychange',function(){var v=els[cur];if(dead||!v||!started)return;if(document.hidden)v.pause();else play(v);});
 })();
 </script>
+<script>
+(async function(){
+var card=document.querySelector('.rvc'),grid=document.querySelector('.rv');if(!card||!grid||!window.fetch)return;
+var items;try{var r=await fetch('/api/reviews',{cache:'no-store'});if(!r.ok)return;items=await r.json();if(!Array.isArray(items))return}catch(e){return}
+var st=document.createElement('style');st.textContent='.rvf{display:grid;gap:12px;text-align:left;margin-top:18px}.rvf label{font-weight:600;font-size:.92rem;color:var(--text)}.rvf input,.rvf textarea{width:100%;font:inherit;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--text)}.rvf textarea{min-height:96px;resize:vertical}.rvs{display:flex;gap:6px}.rvs button{background:none;border:0;font-size:2rem;line-height:1;color:#5a626c;cursor:pointer;padding:2px}.rvs button.on{color:var(--or)}.rvf .btn{width:100%}.rvm{margin-top:4px;font-weight:600}.rvh{position:absolute;left:-9999px;opacity:0}';document.head.appendChild(st);
+function fig(d){var g=document.createElement('figure'),s=document.createElement('div'),q=document.createElement('blockquote'),c=document.createElement('figcaption');s.className='st';s.textContent='★★★★★'.slice(0,d.stars||5);s.setAttribute('aria-label',(d.stars||5)+' estrellas');q.textContent=d.text||'';c.textContent=(d.name||'')+(d.zona?' · '+d.zona:'');g.append(s,q,c);return g}
+function show(list){grid.replaceChildren.apply(grid,list.map(fig));grid.hidden=!list.length}
+show(items);
+var stars=5,f=document.createElement('form');f.className='rvf';
+f.innerHTML='<div><label>Tu valoración</label><div class="rvs" role="radiogroup" aria-label="Valoración"></div></div><div><label for="rn">Tu nombre</label><input id="rn" maxlength="40" required autocomplete="given-name"></div><div><label for="rz">Zona (opcional)</label><input id="rz" maxlength="40" placeholder="Ej. Sevilla Este"></div><div><label for="rt">Tu opinión</label><textarea id="rt" maxlength="500" minlength="10" required placeholder="Cuéntanos qué tal fue el servicio"></textarea></div><input class="rvh" id="rw" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn" type="submit" style="background:var(--wa);color:#04210f">Publicar mi opinión</button><div class="rvm" role="status"></div>';
+var sb=f.querySelector('.rvs'),msg=f.querySelector('.rvm'),sub=f.querySelector('button.btn');
+function paint(){[].forEach.call(sb.children,function(b,i){b.className=i<stars?'on':'';b.setAttribute('aria-pressed',i<stars)})}
+for(var i=1;i<=5;i++)(function(n){var b=document.createElement('button');b.type='button';b.textContent='★';b.setAttribute('aria-label',n+' estrellas');b.onclick=function(){stars=n;paint()};sb.appendChild(b)})(i);paint();
+card.querySelector('p').textContent='Tu opinión ayuda a otros conductores a confiar. Aparecerá en la web cuando Oscar la apruebe.';
+card.querySelector('a.btn').replaceWith(f);
+f.onsubmit=async function(e){e.preventDefault();sub.disabled=true;msg.textContent='Enviando…';
+ try{var r=await fetch('/api/reviews',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({name:f.querySelector('#rn').value,zona:f.querySelector('#rz').value,text:f.querySelector('#rt').value,stars:stars,web:f.querySelector('#rw').value})});var j=await r.json().catch(function(){return{}});
+  if(r.ok){f.reset();stars=5;paint();msg.textContent='¡Gracias! Tu opinión se publicará en cuanto Oscar la revise.'}else{msg.textContent=j.error||'No se ha podido enviar. Inténtalo de nuevo.'}}
+ catch(err){msg.textContent='No se ha podido enviar. Inténtalo de nuevo.'}
+ sub.disabled=false};
+})();
+</script>
 </body>
 </html>
