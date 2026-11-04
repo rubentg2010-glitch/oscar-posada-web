@@ -141,8 +141,9 @@ h2.t::after{content:"";display:block;width:64px;height:4px;background:var(--or);
 .faq{max-width:760px}
 details{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:8px;padding:0 20px}
 summary{cursor:pointer;font-weight:600;padding:13px 0;list-style:none;display:flex;justify-content:space-between;gap:12px}
-summary::after{content:"+";color:var(--or);font-size:1.5rem;line-height:1}
-details[open] summary::after{content:"–"}
+summary::after{content:"+";color:var(--or);font-size:1.5rem;line-height:1;display:inline-block;transition:transform .45s cubic-bezier(.22,.61,.36,1)}
+details[open] summary::after{transform:rotate(135deg)}
+summary::-webkit-details-marker{display:none}
 details p{color:var(--muted);padding-bottom:14px}
 
 /* CTA + PIE */
@@ -407,6 +408,27 @@ f.onsubmit=async function(e){e.preventDefault();sub.disabled=true;msg.textConten
   if(r.ok){f.reset();stars=5;paint();msg.textContent='¡Gracias por tu opinión! 🙌'}else{msg.textContent=j.error||'No se ha podido enviar. Inténtalo de nuevo.'}}
  catch(err){msg.textContent='No se ha podido enviar. Inténtalo de nuevo.'}
  sub.disabled=false};
+})();
+</script>
+<script>
+(function(){
+if(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches||!Element.prototype.animate)return;
+var EASE='cubic-bezier(.22,.61,.36,1)',T=520;
+document.querySelectorAll('details').forEach(function(d){
+ var s=d.querySelector('summary'),c=d.querySelector('summary ~ *');if(!s)return;
+ s.addEventListener('click',function(e){
+  e.preventDefault();
+  if(d._a){d._a.cancel();d._a=null}
+  var open=d.open,from=d.offsetHeight,to;
+  d.style.overflow='hidden';
+  if(!open){d.open=true;to=d.offsetHeight}
+  else{d.open=false;to=d.offsetHeight;d.open=true}
+  var a=d.animate({height:[from+'px',to+'px']},{duration:T,easing:EASE});d._a=a;
+  if(c)c.animate(open?{opacity:[1,0],transform:['none','translateY(-8px)']}:{opacity:[0,1],transform:['translateY(-8px)','none']},{duration:T*.9,easing:EASE,fill:'both'});
+  var end=function(){d._a=null;d.style.overflow='';if(open)d.open=false};
+  a.onfinish=end;a.oncancel=function(){d._a=null;d.style.overflow=''};
+ });
+});
 })();
 </script>
 </body>

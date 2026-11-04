@@ -32,6 +32,27 @@ def wa(t): return 'https://wa.me/34674623880?text='+quote(t,safe='')
 def e(s): return html.escape(s,quote=True)
 def url(slug): return f'{D}/mecanico-a-domicilio-{slug}/'
 
+ACC='''<script>
+(function(){
+if(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches||!Element.prototype.animate)return;
+var EASE='cubic-bezier(.22,.61,.36,1)',T=520;
+document.querySelectorAll('details').forEach(function(d){
+ var s=d.querySelector('summary'),c=d.querySelector('summary ~ *');if(!s)return;
+ s.addEventListener('click',function(e){
+  e.preventDefault();
+  if(d._a){d._a.cancel();d._a=null}
+  var open=d.open,from=d.offsetHeight,to;
+  d.style.overflow='hidden';
+  if(!open){d.open=true;to=d.offsetHeight}
+  else{d.open=false;to=d.offsetHeight;d.open=true}
+  var a=d.animate({height:[from+'px',to+'px']},{duration:T,easing:EASE});d._a=a;
+  if(c)c.animate(open?{opacity:[1,0],transform:['none','translateY(-8px)']}:{opacity:[0,1],transform:['translateY(-8px)','none']},{duration:T*.9,easing:EASE,fill:'both'});
+  var end=function(){d._a=null;d.style.overflow='';if(open)d.open=false};
+  a.onfinish=end;a.oncancel=function(){d._a=null;d.style.overflow=''};
+ });
+});
+})();
+</script>'''
 EXTRA='''
 .zh{padding:44px 0 36px;color:#fff;text-shadow:0 2px 22px rgba(0,0,0,.6)}
 .zh h1{max-width:20ch}
@@ -147,6 +168,7 @@ def page(z):
 </main>
 <footer><div class="w"><span>© 2026 Oscar Posada · Mecánico a domicilio</span><span>Rápido, económico y de confianza</span><a href="tel:+34674623880" style="color:inherit">674 623 880</a></div><div class="w"><p class="cr">Web creada por <a href="https://wa.me/34711553395?text=Hola%20Rub%C3%A9n%2C%20he%20visto%20la%20web%20de%20Oscar%20Posada%20y%20me%20gustar%C3%ADa%20que%20me%20hagas%20una%20p%C3%A1gina%20web." target="_blank" rel="noopener" aria-label="Contactar con Rubén por WhatsApp para que te haga una página web"><b>Rubén</b></a></p></div></footer>
 <div class="bar"><a class="btn wa" href="{msg}" target="_blank" rel="noopener"><svg class="i" style="width:22px;height:22px"><use href="#ct"/></svg>Pedir presupuesto por WhatsApp</a></div>
+{ACC}
 </body>
 </html>
 '''
