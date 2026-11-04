@@ -64,7 +64,9 @@ EXTRA='''
 .zs h2{font-size:clamp(1.7rem,3.6vw,2.3rem);margin-bottom:14px;text-shadow:0 2px 18px rgba(0,0,0,.6)}
 .zs p{color:#dfe5ea;max-width:70ch;margin-bottom:12px;text-shadow:0 1px 12px rgba(0,0,0,.7)}
 .zc{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:18px}
-.zc article{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.zc article{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;transition:translate .28s,scale .28s,box-shadow .28s,border-color .28s}
+@media (hover:hover){.zc article:hover{translate:0 -6px;scale:1.02;border-color:rgba(255,122,0,.7);box-shadow:0 20px 44px rgba(0,0,0,.5),0 0 28px rgba(255,122,0,.18)}}
+.zc article:active{translate:0 -3px;scale:.97;border-color:rgba(255,122,0,.8)}
 .zc b{display:block;font:700 1.4rem var(--head);color:var(--or);margin-bottom:4px}
 .zc h3{font-size:1.3rem;margin-bottom:4px}.zc p{margin:0;color:var(--muted);text-shadow:none}
 .zl{display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0;margin-top:14px}
