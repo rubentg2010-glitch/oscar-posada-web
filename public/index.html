@@ -272,10 +272,10 @@ footer .w{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-betwee
 </div></section>
 
 <section id="opiniones"><div class="w">
-  <style>#opiniones{content-visibility:auto;contain-intrinsic-size:auto 420px}.rv{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin:0 0 24px}.rv[hidden]{display:none}.rv figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}.rv .st{color:var(--or);letter-spacing:3px;font-size:1.1rem}.rv blockquote{margin:10px 0 14px;color:var(--text)}.rv figcaption{color:var(--muted);font-size:.92rem}.rvc{max-width:640px;margin:0 auto;text-align:center;background:var(--card);border:1px solid var(--line);border-top:5px solid var(--or);border-radius:16px;padding:28px 22px}.rvc .st{color:var(--or);letter-spacing:4px;font-size:1.5rem}.rvc p{color:var(--muted);margin:10px 0 20px}.rvc .btn{background:var(--wa);color:#04210f}</style>
+  <style>#opiniones{content-visibility:auto;contain-intrinsic-size:auto 420px}.rvg{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin:0 0 24px}.rvg[hidden]{display:none}.rvg figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}.rvg .st{color:var(--or);letter-spacing:3px;font-size:1.35rem}.rvg blockquote{margin:10px 0 14px;color:var(--text);font-size:1.08rem;line-height:1.5}.rvg figcaption{display:flex;flex-direction:column;gap:2px;margin-top:6px}.rvg figcaption strong{font-size:1.25rem;color:var(--text)}.rvg figcaption span{font-size:1.05rem;color:var(--or2);font-weight:600}.rvc{max-width:640px;margin:0 auto;text-align:center;background:var(--card);border:1px solid var(--line);border-top:5px solid var(--or);border-radius:16px;padding:28px 22px}.rvc .st{color:var(--or);letter-spacing:4px;font-size:1.5rem}.rvc p{color:var(--muted);margin:10px 0 20px}.rvc .btn{background:var(--wa);color:#04210f}</style>
   <div class="hd"><span class="kick">Opiniones</span><h2 class="t">Lo que dicen mis clientes</h2></div>
-  <!-- Reseñas reales: copia un bloque <figure> dentro de .rv, quita hidden y rellena nombre, zona y texto -->
-  <div class="rv" hidden>
+  <!-- Reseñas reales: copia un bloque <figure> dentro de .rvg, quita hidden y rellena nombre, zona y texto -->
+  <div class="rvg" hidden>
     <figure><div class="st" aria-label="5 estrellas">★★★★★</div><blockquote>Texto de la reseña del cliente.</blockquote><figcaption>Nombre · Zona</figcaption></figure>
   </div>
   <div class="rvc"><div class="st" aria-hidden="true">★★★★★</div><h3>¿Ya te arreglé el coche?</h3><p>Tu opinión ayuda a otros conductores a confiar. Cuéntame qué tal fue el servicio, solo te llevará un minuto.</p><a class="btn" href="https://wa.me/34674623880?text=Hola%20Oscar%2C%20quiero%20dejar%20mi%20opini%C3%B3n%20sobre%20el%20servicio%3A" target="_blank" rel="noopener"><svg class="i" style="width:22px;height:22px"><use href="#ct"/></svg>Dejar mi opinión</a></div>
@@ -377,10 +377,10 @@ footer .w{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-betwee
 </script>
 <script>
 (async function(){
-var card=document.querySelector('.rvc'),grid=document.querySelector('.rv');if(!card||!grid||!window.fetch)return;
+var card=document.querySelector('.rvc'),grid=document.querySelector('.rvg');if(!card||!grid||!window.fetch)return;
 var items;try{var r=await fetch('/api/reviews',{cache:'no-store'});if(!r.ok)return;items=await r.json();if(!Array.isArray(items))return}catch(e){return}
 var st=document.createElement('style');st.textContent='.rvf{display:grid;gap:12px;text-align:left;margin-top:18px}.rvf label{font-weight:600;font-size:.92rem;color:var(--text)}.rvf input,.rvf textarea{width:100%;font:inherit;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--text)}.rvf textarea{min-height:96px;resize:vertical}.rvs{display:flex;gap:6px}.rvs button{background:none;border:0;font-size:2rem;line-height:1;color:#5a626c;cursor:pointer;padding:2px}.rvs button.on{color:var(--or)}.rvf .btn{width:100%}.rvm{margin-top:4px;font-weight:600}.rvh{position:absolute;left:-9999px;opacity:0}';document.head.appendChild(st);
-function fig(d){var g=document.createElement('figure'),s=document.createElement('div'),q=document.createElement('blockquote'),c=document.createElement('figcaption');s.className='st';s.textContent='★★★★★'.slice(0,d.stars||5);s.setAttribute('aria-label',(d.stars||5)+' estrellas');q.textContent=d.text||'';c.textContent=(d.name||'')+(d.zona?' · '+d.zona:'');g.append(s,q,c);return g}
+function fig(d){var g=document.createElement('figure'),s=document.createElement('div'),q=document.createElement('blockquote'),c=document.createElement('figcaption');s.className='st';s.textContent='★★★★★'.slice(0,d.stars||5);s.setAttribute('aria-label',(d.stars||5)+' estrellas');q.textContent=d.text||'';var n=document.createElement('strong');n.textContent=d.name||'';c.appendChild(n);if(d.zona){var z=document.createElement('span');z.textContent=d.zona;c.appendChild(z)}g.append(s,q,c);return g}
 function show(list){grid.replaceChildren.apply(grid,list.map(fig));grid.hidden=!list.length}
 show(items);
 var stars=5,f=document.createElement('form');f.className='rvf';
