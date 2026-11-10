@@ -9,7 +9,7 @@ home=open(P+'/index.html',encoding='utf-8').read()
 css=re.search(r'<style>\n(.*?)</style>\n</head>',home,re.S).group(1)
 css=css.replace('url(assets/','url(/assets/')
 sprite=re.search(r'<svg width="0" height="0".*?</svg>',home,re.S).group(0)
-fav=re.search(r'<link rel="icon"[^>]*>',home).group(0)
+fav=''.join(re.findall(r'<link rel="(?:icon|apple-touch-icon)"[^>]*>',home))
 fonts='<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">'
 
 # (nombre, slug, barrios/zonas, frase propia)
